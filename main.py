@@ -4,9 +4,10 @@ from src.maze import Maze
 
 WIN_X_SIZE = 1920
 WIN_Y_SIZE = 1080
-NUM_COLS = 100
+NUM_COLS = 25
 CELL_SIZE = WIN_X_SIZE // NUM_COLS
 NUM_ROWS = WIN_Y_SIZE // CELL_SIZE
+
 
 def main():
     win = Window(WIN_X_SIZE, WIN_Y_SIZE)

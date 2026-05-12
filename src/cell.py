@@ -14,31 +14,33 @@ class Cell:
         self.__y1 = -1
         self.__y2 = -1
         self.__win = win
+        self.visited = False
 
-    def draw(self, x1, x2, y1, y2, color) -> None:
+    def set_coords(self, x1, x2, y1, y2) -> None:
         self.__x1 = x1
-        self.__y1 = y1
         self.__x2 = x2
+        self.__y1 = y1
         self.__y2 = y2
 
-        pt1, pt2 = Point(x1, y1), Point(x2, y1)
-        pt3, pt4 = Point(x1, y2), Point(x2, y2)
-        walls = []
+    def draw(self, color) -> None:
+        top_left = Point(self.__x1, self.__y1)
+        top_right = Point(self.__x2, self.__y1)
+        bottom_left = Point(self.__x1, self.__y2)
+        bottom_right = Point(self.__x2, self.__y2)
 
-        if self.has_left_wall:
-            walls.append(Line(pt1, pt3))
-        if self.has_right_wall:
-            walls.append(Line(pt2, pt4))
-        if self.has_top_wall:
-            walls.append(Line(pt3, pt4))
-        if self.has_bottom_wall:
-            walls.append(Line(pt1, pt2))
+        walls = [
+                (Line(top_left, bottom_left), self.has_left_wall),
+                (Line(top_right, bottom_right), self.has_right_wall),
+                (Line(top_left, top_right), self.has_top_wall),
+                (Line(bottom_left, bottom_right), self.has_bottom_wall),
+            ]
 
         if self.__win:
-            for wall in walls:
-                wall.draw(self.__win.canvas, color)
+            for wall, exists in walls:
+                wall_color = color if exists else "white"
+                wall.draw(self.__win.canvas, wall_color)
 
-    def find_center(self) -> Point:
+    def __find_center(self) -> Point:
         x = self.__x1 + abs(self.__x1 - self.__x2) / 2
         y = self.__y1 + abs(self.__y1 - self.__y2) / 2
 
