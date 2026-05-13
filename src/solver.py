@@ -8,8 +8,8 @@ class Solver:
 
     def __valid_cell(self, direction, next_y, next_x) -> bool:
         valid_cell_position = (
-                next_y >= self.__maze.y1 and next_y <= self.__maze.num_rows and
-                next_x >= self.__maze.x1 and next_x <= self.__maze.num_cols
+                next_y >= self.__maze.y1 and next_y < self.__maze.num_rows and
+                next_x >= self.__maze.x1 and next_x < self.__maze.num_cols
             )
 
         if not valid_cell_position:
