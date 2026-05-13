@@ -1,3 +1,4 @@
+from src.solver import Solver
 from src.window import Window
 from src.maze import Maze
 
@@ -14,6 +15,9 @@ def main():
 
     maze = Maze(1, 1, WIN_X_SIZE, WIN_Y_SIZE,
                 NUM_ROWS, NUM_COLS, CELL_SIZE, CELL_SIZE, win)
+
+    solver = Solver(maze)
+    solver.solve_dfs()
 
     win.wait_for_close()
 

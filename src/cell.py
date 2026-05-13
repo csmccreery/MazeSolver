@@ -1,4 +1,3 @@
-from .window import Window
 from .point import Point
 from .line import Line
 
@@ -14,6 +13,8 @@ class Cell:
         self.__y1 = -1
         self.__y2 = -1
         self.__win = win
+        self.location = ()
+        self.target = False
         self.visited = False
 
     def set_coords(self, x1, x2, y1, y2) -> None:
@@ -48,10 +49,10 @@ class Cell:
 
     def draw_move(self, to_cell, undo=False) -> None:
         color = "red" if undo else "black"
-        self_center = self.find_center()
+        self_center = self.__find_center()
 
         if to_cell is not None:
-            other_center = to_cell.find_center()
+            other_center = to_cell.__find_center()
         else:
             raise Exception("No adjacent cell found")
 
