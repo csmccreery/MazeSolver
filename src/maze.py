@@ -33,7 +33,7 @@ class Maze:
             self.__seed = seed
             random.seed(seed)
 
-        self.__break_walls(self.x1, self.y1)
+        self.__break_walls(0, 0)
         self.__reset_cells_visited()
 
     def __create_cells(self) -> None:
@@ -48,8 +48,8 @@ class Maze:
             self.__draw_cell()
 
     def __draw_cell(self, frame_rate=0.05) -> None:
-        for i in range(self.num_rows):
-            for j in range(self.num_cols):
+        for i in range(self.y1, self.num_rows):
+            for j in range(self.x1, self.num_cols):
                 y1 = self.y1 + (i * self.cell_size_y)
                 y2 = y1 + self.cell_size_y
 
@@ -65,8 +65,10 @@ class Maze:
         sleep(frame_rate)
 
     def __break_entrance_and_exit(self) -> None:
-        self.__cells[1][1].has_left_wall = False
-        self.__cells[-1][-1].has_right_wall = False
+        self.__cells[1][1].has_top_wall = False
+        self.__cells[1][1].draw("white")
+        self.__cells[-1][-1].has_bottom_wall = False
+        self.__cells[-1][-1].draw("white")
 
     def __break_walls(self, i, j) -> None:
         self.__cells[i][j].visited = True
@@ -75,11 +77,11 @@ class Maze:
             options = []
             if i + 1 < self.num_rows and not self.__cells[i + 1][j].visited:
                 options.append(("down", i + 1, j))
-            if i - 1 >= 0 and not self.__cells[i - 1][j].visited:
+            if i - 1 >= self.y1 and not self.__cells[i - 1][j].visited:
                 options.append(("up", i - 1, j))
             if j + 1 < self.num_cols and not self.__cells[i][j + 1].visited:
                 options.append(("right", i, j + 1))
-            if j - 1 >= 0 and not self.__cells[i][j - 1].visited:
+            if j - 1 >= self.x1 and not self.__cells[i][j - 1].visited:
                 options.append(("left", i, j - 1))
 
             if len(options) == 0:
