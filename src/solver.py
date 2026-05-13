@@ -17,19 +17,19 @@ class Solver:
             print(f"Position {next_x} outside bounds [{self.__maze.x1}, {self.__maze.num_cols}]")
             return False
 
-        if direction == "up" and self.__maze.cells[next_y][next_x].has_top_wall:
+        if direction == "up" and self.__maze.cells[next_y][next_x].has_bottom_wall:
             print(f"cell at position [{next_y}, {next_x}] has top wall")
             return False
 
-        if direction == "down" and self.__maze.cells[next_y][next_x].has_bottom_wall:
+        if direction == "down" and self.__maze.cells[next_y][next_x].has_top_wall:
             print(f"cell at position [{next_y}, {next_x}] has bottom wall")
             return False
 
-        if direction == "left" and self.__maze.cells[next_y][next_x].has_left_wall:
+        if direction == "left" and self.__maze.cells[next_y][next_x].has_right_wall:
             print(f"cell at position [{next_y}, {next_x}] has left wall")
             return False
 
-        if direction == "right" and self.__maze.cells[next_y][next_x].has_right_wall:
+        if direction == "right" and self.__maze.cells[next_y][next_x].has_left_wall:
             print(f"cell at position [{next_y}, {next_x}] has right wall")
             return False
 
