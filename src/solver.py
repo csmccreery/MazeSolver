@@ -45,6 +45,7 @@ class Solver:
             current_cell = self.__maze.cells[self.__maze.x1][self.__maze.y1]
 
         pos_y, pos_x = current_cell.location
+        current_cell.visited = True
 
         if current_cell.target:
             return True
